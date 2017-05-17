@@ -27,6 +27,10 @@ int main(int argc, char **argv)
 	listenfd = open_listenfd(argv[1]);
 
 	while (1) {
+		clientlen = sizeof(struct sockaddr_storage);
+		connfd = accept(listenfd, (SA*)clientaddr, &clientlen);
+		getnameinfo()
+
 		printf("sleep 1 second\n");
 		sleep(1);
 	}
