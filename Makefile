@@ -1,5 +1,5 @@
 TARGET=tiny-web
-OBJS=main.o sockfd.o
+OBJS=main.o sockfd.o rio_packet.o
 
 all: $(TARGET)
 
