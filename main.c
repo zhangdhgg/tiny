@@ -4,10 +4,14 @@
 /* Define struct sockaddr_storage */
 #include <netinet/in.h>
 #include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <netdb.h>
 #include "sockfd.h"
 
 #define HOSTNAME_LEN (16)
 #define PORT_LEN (6)
+typedef struct sockaddr SA;
 
 int main(int argc, char **argv)
 {
@@ -28,13 +32,13 @@ int main(int argc, char **argv)
 
 	while (1) {
 		clientlen = sizeof(struct sockaddr_storage);
-		connfd = accept(listenfd, (SA*)clientaddr, &clientlen);
-		getnameinfo()
+		connfd = accept(listenfd, (SA *)&clientaddr, &clientlen);
+		if (getnameinfo((SA *)&(clientaddr), clientlen,
+			hostname, HOSTNAME_LEN, port, PORT_LEN, 0)) {
+			fprintf(stderr, "Failed to grep client socket infomation\n");
+		}
 
-		printf("sleep 1 second\n");
-		sleep(1);
+		printf("Accepted connection from (%s, %s)\n", hostname, port);
+		close(connfd);
 	}
-
-	printf("aaa\n");
-	return 0;
 }
