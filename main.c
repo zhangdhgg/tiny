@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <netdb.h>
 #include "sockfd.h"
+#include "req_handle.h"
 
 #define HOSTNAME_LEN (16)
 #define PORT_LEN (6)
@@ -39,6 +40,7 @@ int main(int argc, char **argv)
 		}
 
 		printf("Accepted connection from (%s, %s)\n", hostname, port);
+		doit(connfd);
 		close(connfd);
 	}
 }
